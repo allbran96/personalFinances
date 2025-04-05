@@ -1,4 +1,6 @@
-category,is_tax,amount
-income,True,-27087.54
-hecs,True,-9075.0
-medicare,True,-2420.0
+category,payg,amount
+income_tax,True,27087.54
+hecs_tax,True,9075.0
+medicare_tax,True,2420.0
+capital_gains_tax,False,271.6
+extra_tax,False,629.212

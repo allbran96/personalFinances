@@ -1,9 +1,9 @@
 [tool.black]
-line-length = 175
+line-length = 200
 target-version = ["py312"]
 
 [tool.ruff]
-line-length = 175
+line-length = 200
 indent-width = 4
 target-version = "py312"
 
