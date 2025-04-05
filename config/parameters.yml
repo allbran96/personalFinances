@@ -1,17 +1,27 @@
 paths:
-  tax_brackets: "artifacts/taxBrackets"
+  tax_brackets_file: "artifacts/flat_files/tax_brackets.csv"
+  raw_data: "data/raw"
+  processed_data: "data/processed"
 
 tax_settings:
   levy_rate: 0.02
-  base_threshold: 18200
+
+immutables:
+  base_salary: 121000
+
+# source_info for income, hecs and medibank tax brackets. first bool is "is_tax" (converse is rebate) and second is whether its cumulatively added or just flat rate
+bracket_source_info:
+  income:
+    - true
+    - true
+  hecs:
+    - true
+    - false
+  medibank:
+    - false
+    - false
 
 other_settings:
   debug_mode: true
 
 
-base_salary:
-  - 121000
-financial_year:
-  - 2025
-levy_rate:
-  - 0.02

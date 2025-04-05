@@ -1,0 +1,18 @@
+[tool.black]
+line-length = 150
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 150
+indent-width = 4
+target-version = "py312"
+select = ["E", "F"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+strict = true
