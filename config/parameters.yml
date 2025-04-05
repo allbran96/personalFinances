@@ -1,0 +1,17 @@
+paths:
+  tax_brackets: "artifacts/taxBrackets"
+
+tax_settings:
+  levy_rate: 0.02
+  base_threshold: 18200
+
+other_settings:
+  debug_mode: true
+
+
+base_salary:
+  - 121000
+financial_year:
+  - 2025
+levy_rate:
+  - 0.02
