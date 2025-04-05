@@ -1,5 +1,6 @@
 from processing.tax_statement import create_tax_statement
 from processing.commsec_processing import process_commsec_transactions_file
+from processing.inflows import inflows
 
 
 def main() -> None:
@@ -9,6 +10,9 @@ def main() -> None:
 
     create_tax_statement_message: str = create_tax_statement()
     print(create_tax_statement_message)
+
+    inflows_message: str = inflows()
+    print(inflows_message)
 
     return
 

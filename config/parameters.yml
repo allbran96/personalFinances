@@ -1,11 +1,17 @@
 paths:
-  tax_brackets_file: "artifacts/flat_files/tax_brackets.csv"
   raw_data: "data/raw"
   processed_data: "data/processed"
   archived_data: "data/archive"
-  commsec_transactions_file_name: "confirmation_details.csv"
-  current_portfolio_file_name: "current_portfolio.csv"
-  capital_gains_file_name: "capital_gains.csv"
+
+file_names_inputs:
+  tax_brackets: "artifacts/flat_files/tax_brackets.csv"
+  commsec_transactions_in: "confirmation_details.csv"
+
+file_names_outputs:
+  current_portfolio: "current_portfolio.csv"
+  capital_gains: "capital_gains.csv"
+  tax_statement: "tax_statement.csv"
+  inflows: "inflows.csv"
 
 fixed_values:
   base_salary: 121000
