@@ -3,11 +3,10 @@ paths:
   raw_data: "data/raw"
   processed_data: "data/processed"
 
-tax_settings:
-  levy_rate: 0.02
-
-immutables:
+fixed_values:
   base_salary: 121000
+  medibank_cost: 125
+  levy_rate: 0.02
 
 # source_info for income, hecs and medibank tax brackets. first bool is "is_tax" (converse is rebate) and second is whether its cumulatively added or just flat rate
 bracket_source_info:
