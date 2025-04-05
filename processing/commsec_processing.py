@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from pathlib import Path
-from shutil import copy, move
+from shutil import move
 
 import pandas as pd
 
@@ -17,7 +17,15 @@ def clean_transactions_df(transactions_df: pd.DataFrame) -> pd.DataFrame:
 
     # normalize column names and values
     transactions_df = transactions_df.rename(
-        columns={"Trade Date": "date", "Buy/ Sell": "type", "Security": "security", "Units": "units", "Average Price ($)": "price", "Net Proceeds ($)": "proceeds"}
+        columns={
+            "Trade Date": "date",
+            "Buy/ Sell": "type",
+            "Security": "security",
+            "Units": "units",
+            "Average Price ($)": "price",
+            "Net Proceeds ($)": "proceeds",
+            "Brokerage (inc GST.)": "brokerage",
+        }
     )
 
     # transoform types and clean up
@@ -76,12 +84,12 @@ def capital_gains(transactions_df: pd.DataFrame) -> pd.DataFrame:
 
             # for buy transactions
             buy_total_cost = match_units * buy["price"]
-            buy_brokerage = buy["proceeds"] * (match_units / buy["units"])  # proportional
+            buy_brokerage = buy["brokerage"] * (match_units / buy["units"])  # proportional
             total_cost_basis = buy_total_cost + buy_brokerage
 
             # for sell transactions
             proceeds = match_units * sell["price"]
-            sell_brokerage = sell["proceeds"] * (match_units / sell["units"])
+            sell_brokerage = sell["brokerage"] * (match_units / sell["units"])
             net_proceeds = proceeds - sell_brokerage
 
             # total
@@ -111,10 +119,7 @@ def archive_transactions_file() -> str:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     archive_path = ARCHIVE_DATA_DIR / f"{timestamp}_commsec_transactions.csv"
 
-    if DEBUG_MODE:
-        copy(str(source_path), str(archive_path))
-        print(f"[DEBUG] Copied file to archive: {archive_path}")
-    else:
+    if not DEBUG_MODE:
         move(str(source_path), str(archive_path))
         print(f"Moved file to archive: {archive_path}")
 

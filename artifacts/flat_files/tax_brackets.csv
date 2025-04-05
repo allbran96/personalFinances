@@ -27,3 +27,4 @@ fy,service,lower_bound,upper_bound,rate
 2025,medibank,97001,113000,0.16192
 2025,medibank,113001,151000,0.08095
 2025,medibank,151001,inf,0
+2025,medicare,0,inf,0.02
