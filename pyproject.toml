@@ -1,14 +1,15 @@
 [tool.black]
-line-length = 150
+line-length = 175
 target-version = ["py312"]
 
 [tool.ruff]
-line-length = 150
+line-length = 175
 indent-width = 4
 target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F"]
+ignore = ["E303"]
 preview = true
 
 [tool.ruff.format]

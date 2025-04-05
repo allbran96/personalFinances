@@ -5,9 +5,15 @@ with open(Path("config/parameters.yml"), "r") as f:
     config = yaml.safe_load(f)
 
 # file paths
-TAX_BRACKETS_FILE = Path(config["paths"]["tax_brackets_file"])
 RAW_DATA_DIR = Path(config["paths"]["raw_data"])
 PROCESSED_DATA_DIR = Path(config["paths"]["processed_data"])
+ARCHIVE_DATA_DIR = Path(config["paths"]["archived_data"])
+
+# file names
+TAX_BRACKETS_FILE = Path(config["paths"]["tax_brackets_file"])
+COMMSEC_TRANSACTIONS_FILE_NAME = Path(config["paths"]["commsec_transactions_file_name"])
+CURRENT_PORTFOLIO_FILE_NAME = Path(config["paths"]["current_portfolio_file_name"])
+CAPITAL_GAINS_FILE_NAME = Path(config["paths"]["capital_gains_file_name"])
 
 # numbers
 LEVY_RATE = config["fixed_values"]["levy_rate"]
