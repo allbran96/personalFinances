@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 import pandas as pd
 
 from config.config import BRACKET_SOURCE_INFO, PROCESSED_DATA_DIR
-from scripts.tax_bracket_calculator import calculate_tax_bracket_amount
+from processing.tax_bracket_calculator import calculate_tax_bracket_amount
 
 
 def create_income_statement() -> str:
@@ -21,7 +21,7 @@ def create_income_statement() -> str:
         rows.append(row)
     income_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False)
 
-    # save to repo
+    # save to data/processed
     output_path: Path = PROCESSED_DATA_DIR / "income_statement.csv"
     income_df.to_csv(output_path, index=False, mode="w")
 
