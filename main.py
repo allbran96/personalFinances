@@ -3,7 +3,8 @@ from scripts.create_income_statement import create_income_statement
 
 def main() -> None:
 
-    create_income_statement()
+    output: str = create_income_statement()
+    print(output)
     return
 
 
