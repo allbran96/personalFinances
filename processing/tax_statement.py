@@ -8,14 +8,7 @@ import pandas as pd
 
 from config.config import BRACKET_SOURCE_INFO, PROCESSED_DATA_DIR
 from processing.tax_bracket_calculator import calculate_tax_bracket_amount
-
-
-def capital_gains_amount() -> int:
-
-    capital_gains_df = pd.read_csv(PROCESSED_DATA_DIR / "capital_gains.csv")
-    total_gains = capital_gains_df["gain"].sum()
-
-    return total_gains
+from utils.utils import capital_gains_amount
 
 
 def create_tax_statement() -> str:
