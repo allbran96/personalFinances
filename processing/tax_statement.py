@@ -10,9 +10,21 @@ from config.config import BRACKET_SOURCE_INFO, PROCESSED_DATA_DIR
 from processing.tax_bracket_calculator import calculate_tax_bracket_amount
 
 
+def capital_gains_amount() -> int:
+
+    capital_gains_df = pd.read_csv(PROCESSED_DATA_DIR / "capital_gains.csv")
+    total_gains = capital_gains_df["gain"].sum()
+
+    return total_gains
+
+
 def create_tax_statement() -> str:
 
     base_salary = BRACKET_SOURCE_INFO["income"]["base_amount"]
+    capital_gains = capital_gains_amount()
+    gross_salary = base_salary + capital_gains
+    total_payg_tax = 0.0
+    total_gross_tax = 0.0
 
     # initialize empty row structure
     rows: List[Dict[str, Any]] = []
@@ -24,13 +36,27 @@ def create_tax_statement() -> str:
         is_cumulative = config["is_cumulative"]
         base_amount = config["base_amount"]
 
-        if is_tax:
-            row: Dict[str, Any] = {"category": category, "is_tax": is_tax, "amount": calculate_tax_bracket_amount(category, is_tax, is_cumulative, base_amount, base_salary)}
-            rows.append(row)
-        else:
+        if not is_tax:
             continue
 
-    tax_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False)
+        payg_tax = -calculate_tax_bracket_amount(category, is_tax, is_cumulative, base_amount, base_salary)
+        total_payg_tax += payg_tax
+
+        rows.append({"category": f"{category}_tax", "payg": True, "amount": round(payg_tax, 2)})
+
+        gross_tax = -calculate_tax_bracket_amount(category, is_tax, is_cumulative, gross_salary, gross_salary)
+        total_gross_tax += gross_tax
+
+        if category == "income":
+            cgt_tax = gross_tax - payg_tax
+
+    rows.append({"category": "capital_gains_tax", "payg": False, "amount": round(cgt_tax, 2)})
+
+    payment_delta = total_gross_tax - total_payg_tax
+
+    rows.append({"category": "extra_tax", "payg": False, "amount": round(payment_delta + cgt_tax, 2)})
+
+    tax_df = pd.DataFrame(rows)
 
     # save to data/processed
     output_path: Path = PROCESSED_DATA_DIR / "tax_statement.csv"

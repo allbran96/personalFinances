@@ -17,21 +17,9 @@ CAPITAL_GAINS_FILE_NAME = Path(config["paths"]["capital_gains_file_name"])
 
 # information on inflow/outflow sources
 BRACKET_SOURCE_INFO = {
-    "income": {
-        "is_tax": True,
-        "is_cumulative": True,
-        "base_amount": config["fixed_values"]["base_salary"],
-    },
-    "hecs": {
-        "is_tax": True,
-        "is_cumulative": False,
-        "base_amount": config["fixed_values"]["base_salary"],
-    },
-    "medicare": {
-        "is_tax": True,
-        "is_cumulative": False,
-        "base_amount": config["fixed_values"]["base_salary"],
-    },
+    "income": {"is_tax": True, "is_cumulative": True, "base_amount": config["fixed_values"]["base_salary"]},
+    "hecs": {"is_tax": True, "is_cumulative": False, "base_amount": config["fixed_values"]["base_salary"]},
+    "medicare": {"is_tax": True, "is_cumulative": False, "base_amount": config["fixed_values"]["base_salary"]},
     "medibank": {"is_tax": False, "is_cumulative": False, "base_amount": config["fixed_values"]["medibank_cost"]},
 }
 
