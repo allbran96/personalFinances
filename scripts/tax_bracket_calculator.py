@@ -1,5 +1,6 @@
 # script that reads in flat files from artifacts/taxBrackets and works out the tax paid on base salary
 
+
 import numpy as np
 import pandas as pd
 
@@ -22,14 +23,14 @@ def calculate_tax_bracket_amount(source: str, is_tax: bool, is_cumulative: bool)
 
     # if amount needs to be cumulatively added, like income tax
     if is_cumulative:
-        cumulative_amount = 0
+        cumulative_amount: float = 0.0
         for row in income_brackets.itertuples(index=False):
             if BASE_SALARY > row.upper_bound:
-                cumulative_amount += (row.upper_bound - row.lower_bound) * row.rate
+                cumulative_amount += (row.upper_bound - row.lower_bound) * row.rate  # type: ignore
             else:
-                marginal_amount = (BASE_SALARY - row.lower_bound) * row.rate
+                marginal_amount: float = (BASE_SALARY - row.lower_bound) * row.rate
                 break
-        amount = cumulative_amount + marginal_amount
+        amount: float = cumulative_amount + marginal_amount
 
     # else, like hecs and medibank, it is a flat rate
     else:
@@ -43,4 +44,4 @@ def calculate_tax_bracket_amount(source: str, is_tax: bool, is_cumulative: bool)
         amount *= -1
 
     # return the amount of the rebate/tax
-    return amount
+    return round(amount, 2)
