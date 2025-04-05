@@ -1,4 +1,4 @@
-### script that reads in flat files from artifacts/taxBrackets and works out the tax paid on base salary
+# script that reads in flat files from artifacts/taxBrackets and works out the tax paid on base salary
 
 import numpy as np
 import pandas as pd
