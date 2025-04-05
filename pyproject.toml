@@ -6,7 +6,10 @@ target-version = ["py312"]
 line-length = 150
 indent-width = 4
 target-version = "py312"
+
+[tool.ruff.lint]
 select = ["E", "F"]
+preview = true
 
 [tool.ruff.format]
 quote-style = "single"

@@ -1,9 +1,9 @@
-from scripts.create_payg_tax_csv import create_payg_tax_csv
+from scripts.create_income_statement import create_income_statement
 
 
 def main() -> None:
 
-    create_payg_tax_csv()
+    create_income_statement()
     return
 
 
