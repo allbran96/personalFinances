@@ -1,6 +1,7 @@
 # script that creates the payg_tax csv
 
 
+from pathlib import Path
 from typing import Any, Dict, List
 
 import pandas as pd
@@ -18,10 +19,10 @@ def create_income_statement() -> str:
     for source, (is_tax, is_cumulative) in BRACKET_SOURCE_INFO.items():
         row: Dict[str, Any] = {"name": source, "is_tax": is_tax, "amount": calculate_tax_bracket_amount(source, is_tax, is_cumulative)}
         rows.append(row)
-    payg_tax_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False)
+    income_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False)
 
     # save to repo
-    output_path: str = f"{PROCESSED_DATA_DIR}/payg_tax.csv"
-    payg_tax_df.to_csv(output_path, index=False, mode="w")
+    output_path: Path = PROCESSED_DATA_DIR / "income_statement.csv"
+    income_df.to_csv(output_path, index=False, mode="w")
 
-    return f"PAYG tax table saved to {output_path} with {len(payg_tax_df)} rows."
+    return f"Income statement saved to {output_path} with {len(income_df)} rows."
