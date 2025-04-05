@@ -2,11 +2,11 @@
 
 import pandas as pd
 
-from config.config import PROCESSED_DATA_DIR, BRACKET_SOURCE_INFO
+from config.config import BRACKET_SOURCE_INFO, PROCESSED_DATA_DIR
 from scripts.tax_bracket_calculator import calculate_tax_bracket_amount
 
 
-def create_payg_tax_csv():
+def create_income_statement():
 
     # initialize empty row structure
     rows = []
@@ -15,7 +15,7 @@ def create_payg_tax_csv():
     for source, (is_tax, is_cumulative) in BRACKET_SOURCE_INFO.items():
         row = {"name": source, "is_tax": is_tax, "amount": calculate_tax_bracket_amount(source, is_tax, is_cumulative)}
         rows.append(row)
-    payg_tax_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False, inplace=True)
+    payg_tax_df = pd.DataFrame(rows).sort_values(by="is_tax", ascending=False)
 
     # save to repo
     output_path = f"{PROCESSED_DATA_DIR}/payg_tax.csv"
