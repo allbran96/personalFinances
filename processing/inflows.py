@@ -13,7 +13,7 @@ def inflows() -> str:
 
     base_salary_annl = BRACKET_SOURCE_INFO["income"]["base_amount"]
     net_salary_mthly = round((base_salary_annl - tax_df[tax_df["payg"]]["amount"].sum()) / 12, 2)
-    cgt_amount = capital_gains_amount()
+    cgt_amount = capital_gains_amount("proceeds")
     bonuses = 5000
     inflows = [
         {"name": "base_salary_annl", "frequency": "Annually", "amount": base_salary_annl},

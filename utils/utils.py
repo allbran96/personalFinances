@@ -7,7 +7,7 @@ def read_tax_statement() -> pd.DataFrame:
     return tax_statement_df
 
 
-def capital_gains_amount() -> int:
+def capital_gains_amount(field) -> int:
     capital_gains_df = pd.read_csv(PROCESSED_DATA_DIR / CAPITAL_GAINS_FILE_NAME)
-    total_gains = capital_gains_df["gain"].sum()
+    total_gains = capital_gains_df[field].sum()
     return total_gains

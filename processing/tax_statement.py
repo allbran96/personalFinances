@@ -14,7 +14,7 @@ from utils.utils import capital_gains_amount
 def create_tax_statement() -> str:
 
     base_salary = BRACKET_SOURCE_INFO["income"]["base_amount"]
-    capital_gains = capital_gains_amount()
+    capital_gains = capital_gains_amount("gain")
     gross_salary = base_salary + capital_gains
     total_payg_tax = 0.0
     total_gross_tax = 0.0
