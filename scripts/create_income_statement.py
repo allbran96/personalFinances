@@ -19,6 +19,6 @@ def create_income_statement():
 
     # save to repo
     output_path = f"{PROCESSED_DATA_DIR}/payg_tax.csv"
-    payg_tax_df.to_csv(output_path, index=False)
+    payg_tax_df.to_csv(output_path, index=False, mode="w")
 
     return f"PAYG tax table saved to {output_path} with {len(payg_tax_df)} rows."
