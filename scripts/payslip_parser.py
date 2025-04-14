@@ -178,10 +178,10 @@ def parse_all_payslips():
     df_combined = df_combined[[col for col in column_order if col in df_combined.columns]]
     # Compute net pay and net pay ytd safely
     if "gross" in df_combined.columns and "tax" in df_combined.columns:
-        df_combined.loc[:, "net_pay"] = pd.to_numeric(df_combined["gross"], errors="coerce") - pd.to_numeric(df_combined["tax"], errors="coerce")
+        df_combined.loc[:, "net_pay"] = pd.to_numeric(df_combined["gross"], errors="coerce") + pd.to_numeric(df_combined["tax"], errors="coerce")
 
     if "gross_ytd" in df_combined.columns and "tax_ytd" in df_combined.columns:
-        df_combined.loc[:, "net_pay_ytd"] = pd.to_numeric(df_combined["gross_ytd"], errors="coerce") - pd.to_numeric(df_combined["tax_ytd"], errors="coerce")
+        df_combined.loc[:, "net_pay_ytd"] = pd.to_numeric(df_combined["gross_ytd"], errors="coerce") + pd.to_numeric(df_combined["tax_ytd"], errors="coerce")
 
     df_combined.to_csv(output_csv, index=False)
 
