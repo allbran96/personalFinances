@@ -1,7 +1,7 @@
 paths:
-  raw_data: "data/raw"
+  landing_data: "data/landing"
   processed_data: "data/processed"
-  archived_data: "data/archive"
+  archived_data: "data/archived"
 
 file_names_inputs:
   tax_brackets: "artifacts/flat_files/tax_brackets.csv"
@@ -16,8 +16,9 @@ file_names_outputs:
 fixed_values:
   base_salary: 121000
   medibank_cost: 1500
+  financial_year: 2025
 
 other_settings:
-  debug_mode: true
+  debug_mode: false
 
 

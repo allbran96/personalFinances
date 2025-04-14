@@ -1,6 +1,6 @@
-from processing.tax_statement import create_tax_statement
-from processing.commsec_processing import process_commsec_transactions_file
-from processing.inflows import inflows
+from scripts.tax_statement import create_tax_statement
+from scripts.commsec_processing import process_commsec_transactions_file
+from scripts.inflows import inflows
 
 
 def main() -> None:

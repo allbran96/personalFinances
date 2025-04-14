@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 import pandas as pd
 
 from config.config import BRACKET_SOURCE_INFO, PROCESSED_DATA_DIR
-from processing.tax_bracket_calculator import calculate_tax_bracket_amount
+from scripts.tax_bracket_calculator import calculate_tax_bracket_amount
 from utils.utils import capital_gains_amount
 
 
