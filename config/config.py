@@ -22,6 +22,7 @@ INFLOWS_FILE_NAME = Path(config["file_names_outputs"]["inflows"])
 # information on inflow/outflow sources
 BRACKET_SOURCE_INFO = {
     "income": {"is_tax": True, "is_cumulative": True, "base_amount": config["fixed_values"]["base_salary"]},
+    "bonuses": {"is_tax": True, "is_cumulative": True, "base_amount": config["fixed_values"]["base_salary"]},
     "hecs": {"is_tax": True, "is_cumulative": False, "base_amount": config["fixed_values"]["base_salary"]},
     "medicare": {"is_tax": True, "is_cumulative": False, "base_amount": config["fixed_values"]["base_salary"]},
     "medibank": {"is_tax": False, "is_cumulative": False, "base_amount": config["fixed_values"]["medibank_cost"]},
@@ -29,7 +30,9 @@ BRACKET_SOURCE_INFO = {
 
 # fixed values
 FINANCIAL_YEAR = config["fixed_values"]["financial_year"]
-
+BASE_SALARY = int(config["fixed_values"]["base_salary"])
+BONUSES = int(config["fixed_values"]["bonuses"])
+SUPERANNUATION_RATE = float(config["fixed_values"]["super_rate"])
 
 # debugging
 DEBUG_MODE = config["other_settings"]["debug_mode"]

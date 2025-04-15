@@ -14,9 +14,11 @@ file_names_outputs:
   inflows: "inflows.csv"
 
 fixed_values:
-  base_salary: 121000
+  base_salary: 121330
+  bonuses: 4000
   medibank_cost: 1500
   financial_year: 2025
+  super_rate: 0.115
 
 other_settings:
   debug_mode: false

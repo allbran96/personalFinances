@@ -1,29 +1,46 @@
 # script that creates inflows.csv
 
-
+from pathlib import Path
 import pandas as pd
 
-from config.config import BRACKET_SOURCE_INFO, INFLOWS_FILE_NAME, PROCESSED_DATA_DIR
-from utils.utils import capital_gains_amount, read_tax_statement
+from config.config import LANDING_DATA_DIR, BASE_SALARY, BONUSES, PROCESSED_DATA_DIR, FINANCIAL_YEAR, SUPERANNUATION_RATE
+from utils.utils import capital_gains_amount, save_df_to_csv
+from utils.dates import in_current_financial_year
 
 
-def inflows() -> str:
-
-    tax_df = read_tax_statement()
-
-    base_salary_annl = BRACKET_SOURCE_INFO["income"]["base_amount"]
-    net_salary_mthly = round((base_salary_annl - tax_df[tax_df["payg"]]["amount"].sum()) / 12, 2)
-    cgt_amount = capital_gains_amount("proceeds")
-    bonuses = 5000
+def create_inflows(cg_amount: float) -> pd.DataFrame:
+    
     inflows = [
-        {"name": "base_salary_annl", "frequency": "Annually", "amount": base_salary_annl},
-        {"name": "net_salary_mthly", "frequency": "Monthly", "amount": net_salary_mthly},
-        {"name": "cgt_amount", "frequency": "Annually", "amount": cgt_amount},
-        {"name": "bonuses", "frequency": "Annually", "amount": bonuses},
+        {"name": "base_salary", "amount": BASE_SALARY},
+        {"name": "bonuses", "amount": BONUSES},
+        {"name": "capital_gains", "amount": cg_amount},
+        {"name": "superannuation_work", "amount": round(BASE_SALARY*SUPERANNUATION_RATE,2)},
+        {"name": "dividends", "amount": 0}
     ]
 
-    inflows_df = pd.DataFrame(inflows)
-    output_path = PROCESSED_DATA_DIR / INFLOWS_FILE_NAME
-    inflows_df.to_csv(output_path, index=False)
+    return pd.DataFrame(inflows)
 
-    return f"Inflow statement saved to {output_path} with {len(inflows_df)} rows."
+
+def main():
+
+    # defining paths
+    # input path for after processing commsec transactions
+    commsec_transactions_path = Path(PROCESSED_DATA_DIR / "commsec" / "capital_gains.csv")
+    # output path for inflows.csv
+    inflows_path = Path(PROCESSED_DATA_DIR / f"inflows_{FINANCIAL_YEAR}.csv")
+
+
+    # calculate capital gains
+    cg_amount = capital_gains_amount(commsec_transactions_path)
+
+    # create the inflows dataframe
+    inflows_df = create_inflows(cg_amount)
+
+    # save df to csv 
+    save_status = save_df_to_csv(inflows_df, inflows_path)
+    print(save_status)
+        
+
+    return 
+
+main()
